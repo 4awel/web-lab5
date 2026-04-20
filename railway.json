@@ -5,7 +5,8 @@
   },
   "deploy": {
     "startCommand": "cd backend && node dist/main.js",
-    "healthcheckPath": "/",
+    "healthcheckPath": "/health",
+    "healthcheckTimeout": 300,
     "restartPolicyType": "ON_FAILURE"
   }
 }
