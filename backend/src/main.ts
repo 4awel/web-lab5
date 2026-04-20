@@ -5,22 +5,16 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   
-  // Настройка CORS для всех источников (для продакшена)
   app.enableCors({
-    origin: true, // Разрешить все источники
+    origin: ['http://localhost:5500', 'http://127.0.0.1:5500', 'http://localhost:3000'],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
     exposedHeaders: ['Authorization'],
   });
   
-  // Railway передает порт через переменную PORT
-  const port = process.env.PORT || 3000;
-  
-  // ВАЖНО: слушаем на 0.0.0.0, а не на localhost
-  await app.listen(port, '0.0.0.0');
-  
-  console.log(`✅ Application is running on port ${port}`);
-  console.log(`✅ CORS enabled for all origins`);
+  await app.listen(3000);
+  console.log('Application is running on: http://localhost:3000');
+  console.log('CORS enabled for: http://localhost:5500 and http://127.0.0.1:5500');
 }
 bootstrap();
