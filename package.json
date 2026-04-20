@@ -1,0 +1,9 @@
+{
+  "name": "auth-app-backend",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "cd backend && npm install && npx prisma generate && npm run build",
+    "start": "cd backend && node dist/main.js",
+    "postinstall": "cd backend && npm install"
+  }
+}
