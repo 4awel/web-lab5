@@ -76,7 +76,7 @@ export class AuthService {
 
     try {
       const payload = this.jwtService.verify(refreshToken, {
-        secret: 'refresh-secret'
+        secret: process.env.JWT_REFRESH_SECRET || 'refresh-secret'
       });
 
       const tokens = await this.generateTokens(user.id, user.email);
@@ -104,14 +104,14 @@ export class AuthService {
       this.jwtService.signAsync(
         { sub: userId, email },
         {
-          secret: 'access-secret',
+          secret: process.env.JWT_ACCESS_SECRET || 'access-secret',
           expiresIn: '15m'
         }
       ),
       this.jwtService.signAsync(
         { sub: userId, email },
         {
-          secret: 'refresh-secret',
+          secret: process.env.JWT_REFRESH_SECRET || 'refresh-secret',
           expiresIn: '7d'
         }
       )
